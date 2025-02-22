@@ -8,6 +8,7 @@ import Learn from "./Learn";
 import Settings from "./Settings";
 import Cards from "./Cards";
 import NotFound from "./NotFound";
+import About from "./About";
 
 const root = document.getElementById("root");
 
@@ -18,6 +19,8 @@ ReactDOM.createRoot(root).render(
     <BrowserRouter>
         <Routes>
             <Route exact path="*" element={<NotFound />} />
+            <Route exact path="/about" element={<About />} />
+
             <Route exact path="/app" element={<App />}>
                 <Route path="/app/learn" element={<Learn />} />
                 <Route path="/app/settings" element={<Settings />} />
