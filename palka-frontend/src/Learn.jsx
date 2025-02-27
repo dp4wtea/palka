@@ -1,9 +1,11 @@
+import {Card} from "@mui/material";
+import QuestionCard from "./QuestionCard";
+
 function Learn() {
     return (
         <div>
-            <h1>Your deck is empty!</h1>
-            <p>Click on the Cards to add them!</p>
 
+            <QuestionCard />
         </div>
     );
 }
