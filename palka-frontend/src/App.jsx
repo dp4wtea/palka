@@ -18,11 +18,8 @@ function App() {
                     <h1>Palka </h1>
 
                 </div>
-
                 <Divider/>
-
                 <Outlet/>
-
             </Paper>
         </Stack>
 

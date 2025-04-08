@@ -9,6 +9,7 @@ import Settings from "./Settings";
 import Cards from "./Cards";
 import NotFound from "./NotFound";
 import About from "./About";
+import StartingPage from "./StartingPage";
 
 const root = document.getElementById("root");
 
@@ -19,6 +20,8 @@ ReactDOM.createRoot(root).render(
     <BrowserRouter>
         <Routes>
             <Route exact path="*" element={<NotFound />} />
+            <Route exact path="/" element={<StartingPage/>} />
+
             <Route exact path="/about" element={<About />} />
 
             <Route exact path="/app" element={<App />}>

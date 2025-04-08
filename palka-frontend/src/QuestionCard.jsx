@@ -1,37 +1,51 @@
-import {Box, Button, Card, CardActions, CardContent, Typography} from "@mui/material";
+import {
+    Box,
+    Button, ButtonGroup,
+    Card,
+    CardActions,
+    CardContent,
+    FormControlLabel,
+    Radio,
+    RadioGroup,
+    Typography
+} from "@mui/material";
 import ReplayIcon from '@mui/icons-material/Replay';
-function QuestionCard()
+function QuestionCard({data, onRedo, onSkip, onCheck,onChange, alreadyAnswered})
 {
-    const bull = (
-        <Box
-            component="span"
-            sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}
-        >
-            •
-        </Box>
-    );
-    return (
-        <Card style={{padding:10,borderRadius:15}} variant="outlined">
-            <CardContent>
-                <Typography gutterBottom sx={{ color: 'text.secondary', fontSize: 14 }}>
-                    Word of the Day
-                </Typography>
-                <Typography variant="h5" component="div">
-                    be{bull}nev{bull}o{bull}lent
-                </Typography>
-                <Typography sx={{ color: 'text.secondary', mb: 1.5 }}>adjective</Typography>
-                <Typography variant="body2">
-                    well meaning and kindly.
-                    <br />
-                    {'"a benevolent smile"'}
-                </Typography>
-            </CardContent>
-            <CardActions>
-                <Button size="small" startIcon={< ReplayIcon/>}>Reload</Button>
-                <Button size="small">Check Answer</Button>
+    const getErrorMessage = (id) => {
+        if(alreadyAnswered[id]) return "   | Wrong Answer !";
+        return "";
 
-            </CardActions>
-        </Card>
+    };
+
+    return (
+        <div>
+            <div id="question" style={{paddingTop: 70}}>
+                <h2>{data.question}</h2>
+            </div>
+            <div id="answers" style={{paddingTop: 15}}>
+                <RadioGroup
+                    aria-labelledby="demo-radio-buttons-group-label"
+                    name="radio-buttons-group"
+                    onChange={onChange}
+                >
+                    <FormControlLabel value="0"  control={<Radio />} label={data.first_answer + getErrorMessage(0)} disabled={alreadyAnswered[0]} />
+                    <FormControlLabel value="1"  control={<Radio />} label={data.second_answer + getErrorMessage(1)} disabled={alreadyAnswered[1]}/>
+                    <FormControlLabel value="2"  control={<Radio />} label={data.third_answer+ getErrorMessage(2) }  disabled={alreadyAnswered[2]}/>
+                    <FormControlLabel value="3"  control={<Radio />} label={data.fourth_answer + getErrorMessage(3)}  disabled={alreadyAnswered[3]} />
+
+                </RadioGroup>
+            </div>
+            <div id="actions" style={{paddingTop: 50,display: "flex", justifyContent: "space-between"}}>
+                <ButtonGroup>
+                    <Button onClick={onSkip} variant="outlined" color="primary">Skip</Button>
+                    <Button onClick = {onRedo} variant="outlined" startIcon={<ReplayIcon />}>Redo</Button>
+                </ButtonGroup>
+                <Button onClick={onCheck} variant="contained" color="primary">Check answer!</Button>
+
+            </div>
+        </div>
     );
-}
+    }
+
 export default QuestionCard;
